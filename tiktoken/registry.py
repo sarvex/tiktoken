@@ -26,7 +26,9 @@ def _find_constructors() -> None:
         # - we use namespace package pattern so `pkgutil.iter_modules` is fast
         # - it's a separate top-level package because namespace subpackages of non-namespace
         #   packages don't quite do what you want with editable installs
-        plugin_mods = pkgutil.iter_modules(tiktoken_ext.__path__, tiktoken_ext.__name__ + ".")
+        plugin_mods = pkgutil.iter_modules(
+            tiktoken_ext.__path__, f"{tiktoken_ext.__name__}."
+        )
 
         for _, mod_name, _ in plugin_mods:
             mod = importlib.import_module(mod_name)
